@@ -14,6 +14,7 @@ import { Video } from './entity/video.entity';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
+      // port: Number(process.env.PORT) || 3000,
       host: process.env.HOST,
       username: process.env.USER1,
       password: process.env.PASSWORD,
