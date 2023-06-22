@@ -6,15 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkTest = void 0;
+exports.LoggerMiddleware = void 0;
 const common_1 = require("@nestjs/common");
-let checkTest = exports.checkTest = class checkTest {
+let LoggerMiddleware = exports.LoggerMiddleware = class LoggerMiddleware {
     use(req, res, next) {
-        console.log(req.params);
-        next();
+        console.log();
     }
 };
-exports.checkTest = checkTest = __decorate([
+exports.LoggerMiddleware = LoggerMiddleware = __decorate([
     (0, common_1.Injectable)()
-], checkTest);
-//# sourceMappingURL=Test.middleware.js.map
+], LoggerMiddleware);
+//# sourceMappingURL=checkUserId.js.map

@@ -3,4 +3,5 @@ export interface IVideo {
   video_id: string;
   video_description: string;
   author_video: string;
+  id: number;
 }

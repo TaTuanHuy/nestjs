@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthGuard = void 0;
+exports.AuthGuardProfile = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
-let AuthGuard = exports.AuthGuard = class AuthGuard {
+let AuthGuardProfile = exports.AuthGuardProfile = class AuthGuardProfile {
     constructor(jwtService) {
         this.jwtService = jwtService;
     }
@@ -27,9 +27,6 @@ let AuthGuard = exports.AuthGuard = class AuthGuard {
                 secret: 'HS256',
             });
             request['user'] = payload;
-            if (!(payload.id == request.params.id)) {
-                throw new common_1.UnauthorizedException();
-            }
         }
         catch (_a) {
             throw new common_1.UnauthorizedException();
@@ -42,8 +39,8 @@ let AuthGuard = exports.AuthGuard = class AuthGuard {
         return type === 'Bearer' ? token : undefined;
     }
 };
-exports.AuthGuard = AuthGuard = __decorate([
+exports.AuthGuardProfile = AuthGuardProfile = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [jwt_1.JwtService])
-], AuthGuard);
-//# sourceMappingURL=auth.guard.js.map
+], AuthGuardProfile);
+//# sourceMappingURL=auth.profile.guard.js.map

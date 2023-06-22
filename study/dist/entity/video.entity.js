@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Video = void 0;
 const typeorm_1 = require("typeorm");
+const user_entity_1 = require("./user.entity");
 let Video = exports.Video = class Video {
 };
 __decorate([
@@ -35,6 +36,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Video.prototype, "author_video", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.user_id),
+    __metadata("design:type", user_entity_1.User)
+], Video.prototype, "user", void 0);
 exports.Video = Video = __decorate([
     (0, typeorm_1.Entity)()
 ], Video);

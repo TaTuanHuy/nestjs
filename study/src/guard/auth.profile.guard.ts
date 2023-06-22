@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuardProfile implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -24,9 +24,6 @@ export class AuthGuard implements CanActivate {
         secret: 'HS256',
       });
       request['user'] = payload;
-      if (!(payload.id == request.params.id)) {
-        throw new UnauthorizedException();
-      }
     } catch {
       throw new UnauthorizedException();
     }

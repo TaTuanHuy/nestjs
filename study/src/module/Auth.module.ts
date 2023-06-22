@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { UserModule } from '../module/User.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from '../api/Controller/Auth.controller';
+import { UserService } from '../services/User.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
 @Module({
@@ -15,7 +16,7 @@ import { User } from '../entity/user.entity';
       signOptions: { expiresIn: '1h', algorithm: 'HS512' },
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   controllers: [AuthController],
   exports: [AuthService],
 })

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn, Unique } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Video {
@@ -14,4 +15,6 @@ export class Video {
   video_description: string;
   @Column()
   author_video: string;
+  @ManyToOne(() => User, (user) => user.user_id)
+  user: User;
 }

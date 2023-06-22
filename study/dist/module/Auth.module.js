@@ -12,6 +12,7 @@ const auth_service_1 = require("../services/auth.service");
 const User_module_1 = require("../module/User.module");
 const jwt_1 = require("@nestjs/jwt");
 const Auth_controller_1 = require("../api/Controller/Auth.controller");
+const User_service_1 = require("../services/User.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../entity/user.entity");
 let AuthModule = exports.AuthModule = class AuthModule {
@@ -27,7 +28,7 @@ exports.AuthModule = AuthModule = __decorate([
                 signOptions: { expiresIn: '1h', algorithm: 'HS512' },
             }),
         ],
-        providers: [auth_service_1.AuthService],
+        providers: [auth_service_1.AuthService, User_service_1.UserService],
         controllers: [Auth_controller_1.AuthController],
         exports: [auth_service_1.AuthService],
     })

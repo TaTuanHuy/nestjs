@@ -12,48 +12,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.VideoService = void 0;
+const video_entity_1 = require("../entity/video.entity");
 const common_1 = require("@nestjs/common");
 const user_entity_1 = require("../entity/user.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-let UserService = exports.UserService = class UserService {
-    constructor(usersRepository) {
+let VideoService = exports.VideoService = class VideoService {
+    constructor(usersRepository, videoRepository) {
         this.usersRepository = usersRepository;
+        this.videoRepository = videoRepository;
     }
-    async findUser(userName) {
-        const res = await this.usersRepository.findOneBy({
-            user_name: userName,
-        });
-        if (!res) {
-            throw new Error('User Not Found');
+    async createVideo(reqBody) {
+        try {
+            const video = new video_entity_1.Video();
+            video.video_id = reqBody.video_id;
+            video.video_name = reqBody.video_name;
+            video.video_description = reqBody.video_description;
+            video.author_video = reqBody.author_video;
+            const result = this.videoRepository.save(video);
+            if (!result) {
+                throw new Error('Tạo mới video bị lỗi');
+            }
+            return 'Success!';
         }
-        return res;
-    }
-    async RegisterUser(reqBody) {
-        const user = new user_entity_1.User();
-        user.user_id = reqBody.user_id;
-        user.id = reqBody.id;
-        user.full_name = reqBody.full_name;
-        user.user_name = reqBody.user_name;
-        user.pass_word = reqBody.pass_word;
-        const result = this.usersRepository.save(user);
-        if (!result) {
-            throw new Error("Can't create New User");
+        catch (error) {
+            throw new Error('Lỗi');
         }
-        return 'Success';
-    }
-    async updateUser(reqBody, id) {
-        const result = await this.usersRepository.update(id, reqBody);
-        if (result.affected == 0) {
-            throw new Error('User Not Found');
-        }
-        return 'Update Complete';
     }
 };
-exports.UserService = UserService = __decorate([
+exports.VideoService = VideoService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
-], UserService);
-//# sourceMappingURL=User.service.js.map
+    __param(0, (0, typeorm_1.InjectRepository)(video_entity_1.Video)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
+], VideoService);
+//# sourceMappingURL=Video.service.js.map

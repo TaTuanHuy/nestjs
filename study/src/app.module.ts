@@ -6,6 +6,7 @@ import { AuthModule } from './module/Auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { Video } from './entity/video.entity';
+import { VideoModule } from './module/Video.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { Video } from './entity/video.entity';
     }),
     HomeModule,
     AuthModule,
+    VideoModule,
   ],
 })
 export class AppModule {}

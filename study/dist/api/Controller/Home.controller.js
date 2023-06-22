@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomeConTrollers = void 0;
 const common_1 = require("@nestjs/common");
 const Home_service_1 = require("../../services/Home.service");
-const video_entity_1 = require("../../entity/video.entity");
 let HomeConTrollers = exports.HomeConTrollers = class HomeConTrollers {
     constructor(appService) {
         this.appService = appService;
@@ -31,17 +30,6 @@ let HomeConTrollers = exports.HomeConTrollers = class HomeConTrollers {
             }, common_1.HttpStatus.NOT_FOUND);
         }
     }
-    async createUser(body) {
-        try {
-            return await this.appService.create(body);
-        }
-        catch (err) {
-            throw new common_1.HttpException({
-                status: 400,
-                error: `Can't create video`,
-            }, common_1.HttpStatus.BAD_REQUEST);
-        }
-    }
     async getProfile(Params) {
         try {
             return await this.appService.findOne(Params);
@@ -53,28 +41,6 @@ let HomeConTrollers = exports.HomeConTrollers = class HomeConTrollers {
             }, common_1.HttpStatus.NOT_FOUND);
         }
     }
-    update(id, updateVideoDTO) {
-        try {
-            return this.appService.update(id, updateVideoDTO);
-        }
-        catch (err) {
-            throw new common_1.HttpException({
-                status: 404,
-                error: `Can't Found Video you want delete`,
-            }, common_1.HttpStatus.NOT_FOUND);
-        }
-    }
-    async DeleteVideo(Params) {
-        try {
-            return await this.appService.deleteOne(Params);
-        }
-        catch (err) {
-            throw new common_1.HttpException({
-                status: 404,
-                error: `Can't Found Video you want delete`,
-            }, common_1.HttpStatus.NOT_FOUND);
-        }
-    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -83,34 +49,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HomeConTrollers.prototype, "getAllVideo", null);
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], HomeConTrollers.prototype, "createUser", null);
-__decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HomeConTrollers.prototype, "getProfile", null);
-__decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, video_entity_1.Video]),
-    __metadata("design:returntype", Promise)
-], HomeConTrollers.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], HomeConTrollers.prototype, "DeleteVideo", null);
 exports.HomeConTrollers = HomeConTrollers = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [Home_service_1.HomeService])
