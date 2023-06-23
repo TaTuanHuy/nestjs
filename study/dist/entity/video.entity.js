@@ -16,7 +16,7 @@ let Video = exports.Video = class Video {
 };
 __decorate([
     (0, typeorm_1.PrimaryColumn)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Video.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -38,8 +38,8 @@ __decorate([
 ], Video.prototype, "author_video", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.user_id),
-    __metadata("design:type", user_entity_1.User)
-], Video.prototype, "user", void 0);
+    __metadata("design:type", Object)
+], Video.prototype, "userId", void 0);
 exports.Video = Video = __decorate([
     (0, typeorm_1.Entity)()
 ], Video);

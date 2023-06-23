@@ -30,6 +30,17 @@ let HomeConTrollers = exports.HomeConTrollers = class HomeConTrollers {
             }, common_1.HttpStatus.NOT_FOUND);
         }
     }
+    async createUser(body) {
+        try {
+            return await this.appService.create(body);
+        }
+        catch (err) {
+            throw new common_1.HttpException({
+                status: 400,
+                error: `Can't create video`,
+            }, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
     async getProfile(Params) {
         try {
             return await this.appService.findOne(Params);
@@ -48,6 +59,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], HomeConTrollers.prototype, "getAllVideo", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], HomeConTrollers.prototype, "createUser", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

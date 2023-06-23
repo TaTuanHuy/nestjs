@@ -1,9 +1,4 @@
-import {
-  Module,
-  RequestMethod,
-  MiddlewareConsumer,
-  HostParam,
-} from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { HomeConTrollers } from '../api/Controller/Home.controller';
 import { HomeService } from '../services/Home.service';
 import { TypeOrmModule } from '@nestjs/typeorm';

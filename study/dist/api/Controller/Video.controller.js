@@ -1,10 +1,65 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VideoController = void 0;
-class VideoController {
+const Video_service_1 = require("../../services/Video.service");
+const common_1 = require("@nestjs/common");
+const auth_profile_guard_1 = require("../../guard/auth.profile.guard");
+let VideoController = exports.VideoController = class VideoController {
     constructor(videoService) {
         this.videoService = videoService;
     }
-}
-exports.VideoController = VideoController;
+    async createVideo(req) {
+        try {
+            return await this.videoService.createVideo(req.body, req.user.id);
+        }
+        catch (err) {
+            throw new common_1.HttpException({
+                status: 400,
+                error: `Can't create video`,
+            }, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async getAllMyVideo(req) {
+        try {
+            return await this.videoService.getAllVideo(req.user.id);
+        }
+        catch (err) {
+            throw new common_1.HttpException({
+                status: 400,
+                error: `Can't get video`,
+            }, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+};
+__decorate([
+    (0, common_1.Post)('/create'),
+    (0, common_1.UseGuards)(auth_profile_guard_1.AuthGuardProfile),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], VideoController.prototype, "createVideo", null);
+__decorate([
+    (0, common_1.Get)('myVideo'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], VideoController.prototype, "getAllMyVideo", null);
+exports.VideoController = VideoController = __decorate([
+    (0, common_1.Controller)('video'),
+    __metadata("design:paramtypes", [Video_service_1.VideoService])
+], VideoController);
 //# sourceMappingURL=Video.controller.js.map

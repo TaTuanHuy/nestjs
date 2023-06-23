@@ -1,10 +1,17 @@
-import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  PrimaryColumn,
+  ManyToOne,
+} from 'typeorm';
 import { User } from './user.entity';
+import { clear } from 'console';
 
 @Entity()
 export class Video {
   @PrimaryColumn()
-  id: string;
+  id: number;
   @Column()
   video_name: string;
   @Column({
@@ -16,5 +23,5 @@ export class Video {
   @Column()
   author_video: string;
   @ManyToOne(() => User, (user) => user.user_id)
-  user: User;
+  userId: User | number;
 }

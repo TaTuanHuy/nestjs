@@ -5,7 +5,10 @@ import {
   ParseIntPipe,
   HttpException,
   HttpStatus,
+  Post,
+  Body,
 } from '@nestjs/common';
+import { IVideo } from '../../interface/IVideo';
 import { HomeService } from '../../services/Home.service';
 import { Video } from '../../entity/video.entity';
 
@@ -26,20 +29,20 @@ export class HomeConTrollers {
       );
     }
   }
-  // @Post()
-  // async createUser(@Body() body: IVideo): Promise<Video> {
-  //   try {
-  //     return await this.appService.create(body);
-  //   } catch (err) {
-  //     throw new HttpException(
-  //       {
-  //         status: 400,
-  //         error: `Can't create video`,
-  //       },
-  //       HttpStatus.BAD_REQUEST,
-  //     );
-  //   }
-  // }
+  @Post()
+  async createUser(@Body() body: IVideo): Promise<Video> {
+    try {
+      return await this.appService.create(body);
+    } catch (err) {
+      throw new HttpException(
+        {
+          status: 400,
+          error: `Can't create video`,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
   @Get(':id')
   async getProfile(@Param('id', ParseIntPipe) Params: string): Promise<Video> {
     try {

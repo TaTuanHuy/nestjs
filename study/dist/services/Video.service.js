@@ -19,32 +19,39 @@ const user_entity_1 = require("../entity/user.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 let VideoService = exports.VideoService = class VideoService {
-    constructor(usersRepository, videoRepository) {
-        this.usersRepository = usersRepository;
+    constructor(videoRepository, userRepository) {
         this.videoRepository = videoRepository;
+        this.userRepository = userRepository;
     }
-    async createVideo(reqBody) {
+    async createVideo(IVideo, idUser) {
         try {
             const video = new video_entity_1.Video();
-            video.video_id = reqBody.video_id;
-            video.video_name = reqBody.video_name;
-            video.video_description = reqBody.video_description;
-            video.author_video = reqBody.author_video;
-            const result = this.videoRepository.save(video);
+            video.id = IVideo.id;
+            video.video_id = IVideo.video_id;
+            video.video_name = IVideo.video_name;
+            video.video_description = IVideo.video_description;
+            video.author_video = IVideo.author_video;
+            video.userId = idUser;
+            const result = await this.videoRepository.save(video);
             if (!result) {
-                throw new Error('Tạo mới video bị lỗi');
+                throw new Error(`Error saving`);
             }
-            return 'Success!';
+            return result;
         }
         catch (error) {
             throw new Error('Lỗi');
         }
     }
+    async getAllVideo(userId) {
+        console.log(userId);
+        const result = this.videoRepository.find();
+        return result;
+    }
 };
 exports.VideoService = VideoService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __param(0, (0, typeorm_1.InjectRepository)(video_entity_1.Video)),
+    __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository])
 ], VideoService);

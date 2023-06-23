@@ -30,10 +30,12 @@ let HomeService = exports.HomeService = class HomeService {
     }
     async create(IVideo) {
         const video = new video_entity_1.Video();
+        video.id = IVideo.id;
         video.video_id = IVideo.video_id;
         video.video_name = IVideo.video_name;
         video.video_description = IVideo.video_description;
         video.author_video = IVideo.author_video;
+        video.userId = IVideo.user;
         const result = this.videosRepository.save(video);
         if (!result) {
             throw new Error(`Can't save video`);

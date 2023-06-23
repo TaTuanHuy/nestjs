@@ -14,6 +14,7 @@ const Home_module_1 = require("./module/Home.module");
 const Auth_module_1 = require("./module/Auth.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const video_entity_1 = require("./entity/video.entity");
+const Video_module_1 = require("./module/Video.module");
 let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([
@@ -35,6 +36,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             Home_module_1.HomeModule,
             Auth_module_1.AuthModule,
+            Video_module_1.VideoModule,
         ],
     })
 ], AppModule);
