@@ -7,5 +7,8 @@ export declare class VideoService {
     private userRepository;
     constructor(videoRepository: Repository<Video>, userRepository: Repository<User>);
     createVideo(IVideo: IVideo, idUser: number): Promise<Video>;
-    getAllVideo(userId: any): Promise<Video[]>;
+    getAllVideo(userId: string): Promise<Video[]>;
+    getOneVideo(videoId: string): Promise<Video>;
+    updateVideo(videoId: string, updateVideoDTO: IVideo): Promise<string>;
+    deleteOne(video_id: string): Promise<string>;
 }

@@ -16,6 +16,7 @@ import { Video } from '../../entity/video.entity';
 export class HomeConTrollers {
   constructor(private readonly appService: HomeService) {}
   @Get()
+  //GetALlVideo
   async getAllVideo(): Promise<Video[]> {
     try {
       return await this.appService.findAll();
@@ -29,20 +30,7 @@ export class HomeConTrollers {
       );
     }
   }
-  @Post()
-  async createUser(@Body() body: IVideo): Promise<Video> {
-    try {
-      return await this.appService.create(body);
-    } catch (err) {
-      throw new HttpException(
-        {
-          status: 400,
-          error: `Can't create video`,
-        },
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-  }
+  //Get One Video
   @Get(':id')
   async getProfile(@Param('id', ParseIntPipe) Params: string): Promise<Video> {
     try {
@@ -57,37 +45,4 @@ export class HomeConTrollers {
       );
     }
   }
-
-  // @Put(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateVideoDTO: Video,
-  // ): Promise<string> {
-  //   try {
-  //     return this.appService.update(id, updateVideoDTO);
-  //   } catch (err) {
-  //     throw new HttpException(
-  //       {
-  //         status: 404,
-  //         error: `Can't Found Video you want delete`,
-  //       },
-  //       HttpStatus.NOT_FOUND,
-  //     );
-  //   }
-  // }
-
-  // @Delete(':id')
-  // async DeleteVideo(@Param('id', ParseIntPipe) Params: string): Promise<void> {
-  //   try {
-  //     return await this.appService.deleteOne(Params);
-  //   } catch (err) {
-  //     throw new HttpException(
-  //       {
-  //         status: 404,
-  //         error: `Can't Found Video you want delete`,
-  //       },
-  //       HttpStatus.NOT_FOUND,
-  //     );
-  //   }
-  // }
 }

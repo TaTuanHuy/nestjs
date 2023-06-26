@@ -23,5 +23,5 @@ export class Video {
   @Column()
   author_video: string;
   @ManyToOne(() => User, (user) => user.user_id)
-  userId: User | number;
+  user: User | number;
 }

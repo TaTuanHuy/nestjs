@@ -12,6 +12,8 @@ export class AuthService {
     @InjectRepository(User)
     private UserRepository: Repository<User>,
   ) {}
+
+  //[Login Service]
   async SignIn(
     userName: string,
     passWord: string,
@@ -29,6 +31,7 @@ export class AuthService {
     const access_token = await this.jwtService.signAsync(payloads);
     return access_token;
   }
+
   //[GET] Profile Video
   async getProfile(token: string): Promise<User> {
     const user = await this.jwtService.verifyAsync(token, {

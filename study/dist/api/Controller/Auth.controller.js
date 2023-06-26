@@ -19,13 +19,14 @@ const auth_profile_guard_1 = require("../../guard/auth.profile.guard");
 const auth_service_1 = require("../../services/auth.service");
 const User_service_1 = require("../../services/User.service");
 const IUsers_1 = require("../../interface/IUsers");
+const IUsers_2 = require("../../interface/IUsers");
 let AuthController = exports.AuthController = class AuthController {
     constructor(authService, userService) {
         this.authService = authService;
         this.userService = userService;
     }
     signIn(signInDto) {
-        return this.authService.SignIn(signInDto.username, signInDto.password);
+        return this.authService.SignIn(signInDto.user_name, signInDto.pass_word);
     }
     Register(registerDto) {
         return this.userService.RegisterUser(registerDto);
@@ -41,13 +42,15 @@ let AuthController = exports.AuthController = class AuthController {
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)('login'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [IUsers_2.IUserInputDTO]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signIn", null);
 __decorate([
     (0, common_1.Post)('register'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [IUsers_1.IUserCreate]),
@@ -63,6 +66,7 @@ __decorate([
 ], AuthController.prototype, "getProfile", null);
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
     (0, common_1.Put)('updateProfile/:id'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('id')),

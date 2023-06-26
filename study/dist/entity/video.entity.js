@@ -39,7 +39,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.user_id),
     __metadata("design:type", Object)
-], Video.prototype, "userId", void 0);
+], Video.prototype, "user", void 0);
 exports.Video = Video = __decorate([
     (0, typeorm_1.Entity)()
 ], Video);

@@ -6,10 +6,12 @@ import { AuthController } from '../api/Controller/Auth.controller';
 import { UserService } from '../services/User.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
+import { Video } from '../entity/video.entity';
 @Module({
   imports: [
     UserModule,
     TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Video]),
     JwtModule.register({
       global: true,
       secret: 'HS256',

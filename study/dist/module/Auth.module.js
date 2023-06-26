@@ -15,6 +15,7 @@ const Auth_controller_1 = require("../api/Controller/Auth.controller");
 const User_service_1 = require("../services/User.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../entity/user.entity");
+const video_entity_1 = require("../entity/video.entity");
 let AuthModule = exports.AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule = __decorate([
@@ -22,6 +23,7 @@ exports.AuthModule = AuthModule = __decorate([
         imports: [
             User_module_1.UserModule,
             typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
+            typeorm_1.TypeOrmModule.forFeature([video_entity_1.Video]),
             jwt_1.JwtModule.register({
                 global: true,
                 secret: 'HS256',

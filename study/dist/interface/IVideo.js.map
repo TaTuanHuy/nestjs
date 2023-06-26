@@ -1,1 +1,1 @@
-{"version":3,"file":"IVideo.js","sourceRoot":"","sources":["../../src/interface/IVideo.ts"],"names":[],"mappings":""}
+{"version":3,"file":"IVideo.js","sourceRoot":"","sources":["../../src/interface/IVideo.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAMyB;AACzB,MAAa,MAAM;CAsBlB;AAtBD,wBAsBC;AAnBC;IAFC,IAAA,0BAAQ,GAAE;IACV,IAAA,4BAAU,GAAE;;0CACM;AAInB;IAFC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;wCACM;AAIjB;IAFC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;iDACe;AAI1B;IAFC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;4CACU;AAMrB;IAFC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;kCACA"}

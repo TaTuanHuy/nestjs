@@ -14,6 +14,7 @@ export class VideoService {
     private userRepository: Repository<User>,
   ) {}
 
+  //Create Video Service
   async createVideo(IVideo: IVideo, idUser: number): Promise<Video> {
     try {
       const video = new Video();
@@ -22,7 +23,7 @@ export class VideoService {
       video.video_name = IVideo.video_name;
       video.video_description = IVideo.video_description;
       video.author_video = IVideo.author_video;
-      video.userId = idUser;
+      video.user = idUser;
       const result = await this.videoRepository.save(video);
       if (!result) {
         throw new Error(`Error saving`);
@@ -33,9 +34,48 @@ export class VideoService {
     }
   }
 
-  async getAllVideo(userId): Promise<Video[]> {
-    console.log(userId);
-    const result = this.videoRepository.find();
+  //Get All Video Users Services
+  async getAllVideo(userId: string): Promise<Video[]> {
+    const result = await this.videoRepository.find({
+      relations: { user: true },
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    });
+    if (!result) {
+      throw new Error(`List Video Not Found`);
+    }
     return result;
+  }
+
+  //Get Profile One Video Service
+  async getOneVideo(videoId: string): Promise<Video> {
+    const result = await this.videoRepository.findOneBy({
+      video_id: videoId,
+    });
+    if (!result) {
+      throw new Error(`List Video Not Found`);
+    }
+    return result;
+  }
+
+  //Update Video Services
+  async updateVideo(videoId: string, updateVideoDTO: IVideo): Promise<string> {
+    const result = await this.videoRepository.update(videoId, updateVideoDTO);
+    if (result.affected == 0) {
+      throw new Error('Video Not Found');
+    }
+    return 'Success';
+  }
+
+  //Delete Video Service
+  async deleteOne(video_id: string): Promise<string> {
+    const result = await this.videoRepository.delete(video_id);
+    if (!result) {
+      throw new Error('Video Not Found');
+    }
+    return 'Successfully deleted';
   }
 }

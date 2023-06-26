@@ -31,7 +31,7 @@ let VideoService = exports.VideoService = class VideoService {
             video.video_name = IVideo.video_name;
             video.video_description = IVideo.video_description;
             video.author_video = IVideo.author_video;
-            video.userId = idUser;
+            video.user = idUser;
             const result = await this.videoRepository.save(video);
             if (!result) {
                 throw new Error(`Error saving`);
@@ -43,9 +43,41 @@ let VideoService = exports.VideoService = class VideoService {
         }
     }
     async getAllVideo(userId) {
-        console.log(userId);
-        const result = this.videoRepository.find();
+        const result = await this.videoRepository.find({
+            relations: { user: true },
+            where: {
+                user: {
+                    id: userId,
+                },
+            },
+        });
+        if (!result) {
+            throw new Error(`List Video Not Found`);
+        }
         return result;
+    }
+    async getOneVideo(videoId) {
+        const result = await this.videoRepository.findOneBy({
+            video_id: videoId,
+        });
+        if (!result) {
+            throw new Error(`List Video Not Found`);
+        }
+        return result;
+    }
+    async updateVideo(videoId, updateVideoDTO) {
+        const result = await this.videoRepository.update(videoId, updateVideoDTO);
+        if (result.affected == 0) {
+            throw new Error('Video Not Found');
+        }
+        return 'Success';
+    }
+    async deleteOne(video_id) {
+        const result = await this.videoRepository.delete(video_id);
+        if (!result) {
+            throw new Error('Video Not Found');
+        }
+        return 'Successfully deleted';
     }
 };
 exports.VideoService = VideoService = __decorate([

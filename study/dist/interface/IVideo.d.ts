@@ -1,4 +1,4 @@
-export interface IVideo {
+export declare class IVideo {
     video_name: string;
     video_id: string;
     video_description: string;

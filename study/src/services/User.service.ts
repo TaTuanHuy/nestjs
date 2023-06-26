@@ -12,6 +12,7 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
+  //Find User Services
   async findUser(userName: string): Promise<IUserInputUpdate | undefined> {
     const res = await this.usersRepository.findOneBy({
       user_name: userName,
@@ -21,6 +22,8 @@ export class UserService {
     }
     return res;
   }
+
+  //Register User Service
   async RegisterUser(reqBody: IUserCreate): Promise<string> {
     const user = new User();
     user.user_id = reqBody.user_id;
@@ -34,6 +37,8 @@ export class UserService {
     }
     return 'Success';
   }
+
+  //Update User Service
   async updateUser(reqBody: IUserCreate, id: string): Promise<string> {
     const result = await this.usersRepository.update(id, reqBody);
     if (result.affected == 0) {

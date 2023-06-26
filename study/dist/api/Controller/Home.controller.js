@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomeConTrollers = void 0;
 const common_1 = require("@nestjs/common");
+const IVideo_1 = require("../../interface/IVideo");
 const Home_service_1 = require("../../services/Home.service");
 let HomeConTrollers = exports.HomeConTrollers = class HomeConTrollers {
     constructor(appService) {
@@ -63,7 +64,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [IVideo_1.IVideo]),
     __metadata("design:returntype", Promise)
 ], HomeConTrollers.prototype, "createUser", null);
 __decorate([

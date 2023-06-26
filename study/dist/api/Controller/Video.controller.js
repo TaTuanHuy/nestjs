@@ -16,13 +16,15 @@ exports.VideoController = void 0;
 const Video_service_1 = require("../../services/Video.service");
 const common_1 = require("@nestjs/common");
 const auth_profile_guard_1 = require("../../guard/auth.profile.guard");
+const auth_video_guard_1 = require("../../guard/auth.video.guard");
+const IVideo_1 = require("../../interface/IVideo");
 let VideoController = exports.VideoController = class VideoController {
     constructor(videoService) {
         this.videoService = videoService;
     }
-    async createVideo(req) {
+    async createVideo(req, reqBody) {
         try {
-            return await this.videoService.createVideo(req.body, req.user.id);
+            return await this.videoService.createVideo(reqBody, req.user.id);
         }
         catch (err) {
             throw new common_1.HttpException({
@@ -42,22 +44,84 @@ let VideoController = exports.VideoController = class VideoController {
             }, common_1.HttpStatus.BAD_REQUEST);
         }
     }
+    async getProfileVideo(req) {
+        try {
+            return await this.videoService.getOneVideo(req.params.id);
+        }
+        catch (err) {
+            throw new common_1.HttpException({
+                status: 400,
+                error: `Can't get video`,
+            }, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async updateVideo(req, reqBody) {
+        try {
+            return await this.videoService.updateVideo(req.user.id, reqBody);
+        }
+        catch (err) {
+            throw new common_1.HttpException({
+                status: 400,
+                error: `Can't update Video`,
+            }, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async deleteVideo(req) {
+        try {
+            return await this.videoService.deleteOne(req.user.id);
+        }
+        catch (err) {
+            throw new common_1.HttpException({
+                status: 400,
+                error: `Can't delete Video`,
+            }, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
 };
 __decorate([
     (0, common_1.Post)('/create'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.UseGuards)(auth_profile_guard_1.AuthGuardProfile),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, IVideo_1.IVideo]),
+    __metadata("design:returntype", Promise)
+], VideoController.prototype, "createVideo", null);
+__decorate([
+    (0, common_1.Get)('myVideo'),
     (0, common_1.UseGuards)(auth_profile_guard_1.AuthGuardProfile),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], VideoController.prototype, "createVideo", null);
+], VideoController.prototype, "getAllMyVideo", null);
 __decorate([
-    (0, common_1.Get)('myVideo'),
+    (0, common_1.Get)(':id'),
+    (0, common_1.UseGuards)(auth_video_guard_1.AuthGuardVideo),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], VideoController.prototype, "getAllMyVideo", null);
+], VideoController.prototype, "getProfileVideo", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.UseGuards)(auth_video_guard_1.AuthGuardVideo),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, IVideo_1.IVideo]),
+    __metadata("design:returntype", Promise)
+], VideoController.prototype, "updateVideo", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)(auth_video_guard_1.AuthGuardVideo),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], VideoController.prototype, "deleteVideo", null);
 exports.VideoController = VideoController = __decorate([
     (0, common_1.Controller)('video'),
     __metadata("design:paramtypes", [Video_service_1.VideoService])

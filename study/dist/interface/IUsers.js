@@ -16,23 +16,27 @@ class IUserInputUpdate {
 exports.IUserInputUpdate = IUserInputUpdate;
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputUpdate.prototype, "id", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputUpdate.prototype, "user_name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputUpdate.prototype, "pass_word", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputUpdate.prototype, "full_name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputUpdate.prototype, "user_id", void 0);
 class IUserCreate {
@@ -40,23 +44,27 @@ class IUserCreate {
 exports.IUserCreate = IUserCreate;
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserCreate.prototype, "id", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserCreate.prototype, "user_name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserCreate.prototype, "pass_word", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserCreate.prototype, "full_name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserCreate.prototype, "user_id", void 0);
 class IUserInputDTO {
@@ -64,11 +72,12 @@ class IUserInputDTO {
 exports.IUserInputDTO = IUserInputDTO;
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputDTO.prototype, "user_name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], IUserInputDTO.prototype, "pass_word", void 0);
 //# sourceMappingURL=IUsers.js.map
